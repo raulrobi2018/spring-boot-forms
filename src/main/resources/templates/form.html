@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+<body>
+
+	<h3 th:text="${title}"></h3>
+	<form th:action="@{/form}" method="post" th:object="${user}">
+
+		<div>
+			<label for="country">Country</label>
+			<div>				
+				<select id="country" th:field="*{country}">
+					<option value="">-- select a country --</option>
+					<!-- Si la lista es un List -->
+<!-- 					<option th:each="country: ${countries}" th:text="${country}" th:value="${country}"></option> -->
+					<!-- Si la lista es un Map -->
+					<option th:each="country: ${countriesMap.entrySet()}" th:text="${country.value}" th:value="${country.key}"></option>
+				</select>
+			</div>
+			<div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
+		</div>
+
+		<div>
+			<label for="identifier">Identifier</label>
+			<div>				
+				<input id="identifier" type="text" th:field="*{identifier}">
+			</div>
+			<div th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></div>
+		</div>
+
+		<div>
+			<label for="name">Name</label>
+			<div>
+				<!-- Esta es una manera de mapear el atributo en la vista -->
+				<!-- <input id="username" type="text" th:value="${user?.username}"> -->
+
+				<!-- Esta es otra manera. El * indica que estará enlazado al atributo username de la calse User.
+				Pero para eso también se debe indicar en la etiqueta form el objeto que está siendo mapeado.
+				El atributo name del input no debe ir porque el th:field automaticamente lo agrega -->
+				<input id="name" type="text" th:field="*{name}">
+			</div>
+
+			<!-- Esta es una manera de mostrar los errores capturados en el controlador  -->
+			<!-- <div th:if="${error != null && error.containsKey('username')}" -->
+			<!-- th:text="${error.username}"></div> -->
+
+			<!-- Esta es otra forma más efectiva y limpia. 
+			     field es una función propia de spring que provee de métodos para manejo 
+			     de errores-->
+			<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+		</div>
+		<div>
+			<label for="lastName">Last name</label>
+			<div>				
+				<input id="lastName" type="text" th:field="*{lastName}">
+			</div>
+			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+		</div>
+		<div>
+			<label for="username">Username</label>
+			<div>				
+				<input id="username" type="text" th:field="*{username}">
+			</div>
+			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<div>
+				<input id="password" type="password" th:field="*{password}">
+			</div>
+			<!-- <div th:if="${error != null && error.containsKey('password')}" -->
+			<!-- th:text="${error.password}"></div> -->
+
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		</div>
+		<div>
+			<label for="email">Email</label>
+			<div>
+				<input id="email" type="email" th:field="*{email}">
+			</div>
+			<!-- <div th:if="${error != null && error.containsKey('email')}" -->
+			<!-- th:text="${error.email}"></div> -->
+			
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+		<div>
+			<label for="account">Account</label>
+			<div>
+				<input id="account" type="text" th:field="*{account}">
+			</div>
+			
+			<div th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></div>
+		</div>
+		<div>
+			<label for="birthDate">Birth date</label>
+			<div>
+				<input id="birthDate" type="text" th:field="*{birthDate}" placeholder="dd/MM/yyyy">
+			</div>
+			
+			<div th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+		</div>
+		<div>
+			<label for="otherDate">Other date</label>
+			<div>
+				<input id="otherDate" type="date" th:field="*{otherDate}" placeholder="dd/MM/yyyy">
+			</div>
+			
+			<div th:if="${#fields.hasErrors('otherDate')}" th:errors="*{otherDate}"></div>
+		</div>
+		<div>
+
+			<div>
+				<input name="send" id="send" type="submit" value="Send">
+			</div>
+		</div>
+
+	</form>
+
+</body>
+</html>
