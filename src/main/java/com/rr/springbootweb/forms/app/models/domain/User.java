@@ -2,6 +2,7 @@ package com.rr.springbootweb.forms.app.models.domain;
 
 import java.util.Date;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -81,8 +82,16 @@ public class User {
 	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date otherDate;
 
-	@NotEmpty
-	private String country;
+	@Valid
+	private Country country;
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 
 	public Date getOtherDate() {
 		return otherDate;
@@ -154,14 +163,6 @@ public class User {
 
 	public void setAccount(Integer account) {
 		this.account = account;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 }

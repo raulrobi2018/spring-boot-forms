@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.rr.springbootweb.forms.app.editors.CountryPropertyEditor;
 import com.rr.springbootweb.forms.app.editors.UpperCaseEditor;
+import com.rr.springbootweb.forms.app.models.domain.Country;
 import com.rr.springbootweb.forms.app.models.domain.User;
+import com.rr.springbootweb.forms.app.services.CountryService;
 import com.rr.springbootweb.forms.app.validators.UserValidation;
 
 @Controller
@@ -34,6 +37,12 @@ public class FormController {
 
 	@Autowired
 	private UserValidation validator;
+	
+	@Autowired
+	private CountryService countryService;
+	
+	@Autowired
+	private CountryPropertyEditor countryEditor;
 
 	/**
 	 * Esta es otra forma de validar. Si utilizamos binder.setValidator reemplaza el
@@ -56,13 +65,15 @@ public class FormController {
 
 		binder.registerCustomEditor(String.class, "name", new UpperCaseEditor());
 		binder.registerCustomEditor(String.class, "lastName", new UpperCaseEditor());
+		
+		binder.registerCustomEditor(Country.class, "country", countryEditor);
 	}
 
 	@ModelAttribute("countries")
-	public List<String> countries() {
-		return Arrays.asList("Uruguay", "Argentina", "Brasil", "España", "EEUU", "Alemania");
+	public List<Country> countries() {
+		return countryService.list();
 	}
-	
+
 	@ModelAttribute("countriesMap")
 	public Map<String, String> countriesMap() {
 		Map<String, String> countries = new HashMap<>();
