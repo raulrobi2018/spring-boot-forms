@@ -96,6 +96,15 @@ public class FormController {
 		return rolesList;
 	}
 
+	@ModelAttribute("rolesMap")
+	public Map<String, String> rolesMap() {
+		Map<String, String> roles = new HashMap<>();
+		roles.put("ROLE_ADMIN", "Administrator");
+		roles.put("ROLE_USER", "User");
+		roles.put("ROLE_MODERATOR", "Moderator");
+		return roles;
+	}
+
 	@GetMapping("/form")
 	public String form(Model model) {
 		// Se crea el usuario para que no de null cuando se inicia el request
