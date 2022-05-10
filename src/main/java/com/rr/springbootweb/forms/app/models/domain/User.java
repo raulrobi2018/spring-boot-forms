@@ -1,8 +1,8 @@
 package com.rr.springbootweb.forms.app.models.domain;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -82,8 +82,12 @@ public class User {
 	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date otherDate;
 
-	@Valid
+	@NotNull
 	private Country country;
+	
+	//@NotEmpty también sirve para validar listas vacías
+	@NotEmpty
+	private List<String> roles;	
 
 	public Country getCountry() {
 		return country;
@@ -146,7 +150,7 @@ public class User {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = lastName;	
 	}
 
 	public String getIdentifier() {
@@ -163,6 +167,14 @@ public class User {
 
 	public void setAccount(Integer account) {
 		this.account = account;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 
 }

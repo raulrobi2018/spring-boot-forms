@@ -10,19 +10,35 @@
 	<form th:action="@{/form}" method="post" th:object="${user}">
 
 		<div>
-			<label for="country.code">Country</label>
+			<label for="country">Country</label>
 			<div>				
-				<select id="country.code" th:field="*{country.code}">
+				<select id="country" th:field="*{country}">
 					<option value="">-- select a country --</option>
 					<!-- Si la lista es un List -->
- 					<option th:each="country: ${countries}" th:text="${country.code} + ' - ' + ${country.name}" th:value="${country.code}"></option> 
+ 					<option th:each="country: ${countries}" th:text="${country.code} + ' - ' + ${country.name}" th:value="${country.id}"></option> 
 					<!-- Si la lista es un Map -->
 					<!-- <option th:each="country: ${countriesMap.entrySet()}" th:text="${country.value}" th:value="${country.key}"></option> -->
 				</select>
 			</div>
-			<div th:if="${#fields.hasErrors('country.code')}" th:errors="*{country.code}"></div>
+			<div th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
 		</div>
 
+		<div>
+			<label >Roles</label>
+			<div th:each="role: ${roles}">
+				<input type="checkbox" th:field="*{roles}" th:value="${role}" />
+				<!-- El th:for funciona como la propiedad "for" de un label. Aquí nos permite que  
+					el checkbox pueda ser cliqueable también en el texto del label. El "#ids" con
+					el método prev() sirve para acceder al id que le asigna de forma automática a 
+					los campos que crea. De	esta forma podemos hacer referencia al mismo id que
+					se le asigna a cada checkbox, por ej. "roles1", "roles2", etc. 
+					Al método "prev" se le pasa como parámetro "roles"
+					que es el objeto que está manejando el th:field -->
+				<label th:for="${#ids.prev('roles')}" th:text="${role}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+		</div>
+		
 		<div>
 			<label for="identifier">Identifier</label>
 			<div>				

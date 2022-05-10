@@ -1,7 +1,7 @@
 package com.rr.springbootweb.forms.app.controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,10 +37,10 @@ public class FormController {
 
 	@Autowired
 	private UserValidation validator;
-	
+
 	@Autowired
 	private CountryService countryService;
-	
+
 	@Autowired
 	private CountryPropertyEditor countryEditor;
 
@@ -65,7 +65,7 @@ public class FormController {
 
 		binder.registerCustomEditor(String.class, "name", new UpperCaseEditor());
 		binder.registerCustomEditor(String.class, "lastName", new UpperCaseEditor());
-		
+
 		binder.registerCustomEditor(Country.class, "country", countryEditor);
 	}
 
@@ -84,6 +84,16 @@ public class FormController {
 		countries.put("GR", "Alemania");
 		countries.put("EU", "EEUU");
 		return countries;
+	}
+
+	@ModelAttribute("roles")
+	public List<String> rolesList() {
+		List<String> rolesList = new ArrayList<>();
+		rolesList.add("ROLE_ADMIN");
+		rolesList.add("ROLE_USER");
+		rolesList.add("ROLE_MODERATOR");
+
+		return rolesList;
 	}
 
 	@GetMapping("/form")

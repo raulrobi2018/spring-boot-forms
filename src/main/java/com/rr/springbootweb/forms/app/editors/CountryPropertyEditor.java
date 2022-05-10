@@ -9,15 +9,21 @@ import com.rr.springbootweb.forms.app.services.CountryService;
 
 //Lo declaramos como Component para poder hacer inyección de dependencia
 @Component
-public class CountryPropertyEditor extends PropertyEditorSupport{
+public class CountryPropertyEditor extends PropertyEditorSupport {
 
 	@Autowired
 	private CountryService service;
-	
+
 	@Override
 	public void setAsText(String idStr) throws IllegalArgumentException {
-		Integer id = Integer.parseInt(idStr);
-		this.setValue(service.getCountryById(id));
+
+		try {
+			Integer id = Integer.parseInt(idStr);
+			this.setValue(service.getCountryById(id));
+		} catch (NumberFormatException e) {
+			setValue(null);
+		}
+
 	}
-	
+
 }

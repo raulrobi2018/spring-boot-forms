@@ -1,7 +1,6 @@
 package com.rr.springbootweb.forms.app.services;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,8 +21,7 @@ public class CountryServiceImpl implements CountryService {
 
 	@Override
 	public List<Country> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return countries;
 	}
 
 	@Override
