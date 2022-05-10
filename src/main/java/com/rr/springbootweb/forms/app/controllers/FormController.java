@@ -1,7 +1,6 @@
 package com.rr.springbootweb.forms.app.controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +22,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.rr.springbootweb.forms.app.editors.CountryPropertyEditor;
+import com.rr.springbootweb.forms.app.editors.RoleEditor;
 import com.rr.springbootweb.forms.app.editors.UpperCaseEditor;
 import com.rr.springbootweb.forms.app.models.domain.Country;
+import com.rr.springbootweb.forms.app.models.domain.Role;
 import com.rr.springbootweb.forms.app.models.domain.User;
 import com.rr.springbootweb.forms.app.services.CountryService;
+import com.rr.springbootweb.forms.app.services.RoleService;
 import com.rr.springbootweb.forms.app.validators.UserValidation;
 
 @Controller
@@ -43,6 +45,12 @@ public class FormController {
 
 	@Autowired
 	private CountryPropertyEditor countryEditor;
+
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private RoleEditor roleEditor;
 
 	/**
 	 * Esta es otra forma de validar. Si utilizamos binder.setValidator reemplaza el
@@ -67,6 +75,7 @@ public class FormController {
 		binder.registerCustomEditor(String.class, "lastName", new UpperCaseEditor());
 
 		binder.registerCustomEditor(Country.class, "country", countryEditor);
+		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
 
 	@ModelAttribute("countries")
@@ -87,13 +96,8 @@ public class FormController {
 	}
 
 	@ModelAttribute("roles")
-	public List<String> rolesList() {
-		List<String> rolesList = new ArrayList<>();
-		rolesList.add("ROLE_ADMIN");
-		rolesList.add("ROLE_USER");
-		rolesList.add("ROLE_MODERATOR");
-
-		return rolesList;
+	public List<Role> rolesList() {
+		return roleService.list();
 	}
 
 	@ModelAttribute("rolesMap")

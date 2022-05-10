@@ -20,10 +20,11 @@
 		<li th:text="${user.country.name}"></li>
 		<li th:text="${#dates.format(user.birthDate, 'dd/MM/yyyy')}"></li>
 	</ul>
-	
+
 	<div>Roles</div>
 	<ul>
-		<li th:each="role: ${user.roles}" th:text="${role}"></li>
+		<li th:each="role: ${user.roles}"
+			th:text="${role.id} + ' - ' + ${role.name} + ' - ' + ${role.role}"></li>
 	</ul>
 
 </body>

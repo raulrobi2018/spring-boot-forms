@@ -25,9 +25,9 @@
 
 		<div>
 			<label >Roles</label>
-			<div th:each="role: ${rolesMap.entrySet()}">
+			<div th:each="role: ${roles}">
 				<!-- Recordar que el atributo "th:field" hace referencia al atributo "roles" de la clase "User" -->
-				<input type="checkbox" th:field="*{roles}" th:value="${role.key}" />
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
 				<!-- El th:for funciona como la propiedad "for" de un label. Aquí nos permite que  
 					el checkbox pueda ser cliqueable también en el texto del label. El "#ids" con
 					el método prev() sirve para acceder al id que le asigna de forma automática a 
@@ -35,9 +35,9 @@
 					se le asigna a cada checkbox, por ej. "roles1", "roles2", etc. 
 					Al método "prev" se le pasa como parámetro "roles"
 					que es el objeto que está manejando el th:field -->
-				<label th:for="${#ids.prev('roles')}" th:text="${role.value}"></label>
+				<label th:for="${#ids.prev('roles')}" th:text="${role.name}"></label>
 			</div>
-			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{rolesMap}"></div>
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
 		
 		<div>

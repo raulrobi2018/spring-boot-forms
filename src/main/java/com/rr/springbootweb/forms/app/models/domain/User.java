@@ -87,7 +87,7 @@ public class User {
 	
 	//@NotEmpty también sirve para validar listas vacías
 	@NotEmpty
-	private List<String> roles;	
+	private List<Role> roles;	
 
 	public Country getCountry() {
 		return country;
@@ -169,11 +169,11 @@ public class User {
 		this.account = account;
 	}
 
-	public List<String> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<String> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
