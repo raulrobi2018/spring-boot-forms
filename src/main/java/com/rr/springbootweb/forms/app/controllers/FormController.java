@@ -116,6 +116,8 @@ public class FormController {
 		user.setName("Silvia");
 		user.setLastName("Fernandez");
 		user.setIdentifier("3232.654.228.D");
+		user.setEnable(true);
+		
 		model.addAttribute("title", "Form login");
 		model.addAttribute("user", user);
 		return "form";

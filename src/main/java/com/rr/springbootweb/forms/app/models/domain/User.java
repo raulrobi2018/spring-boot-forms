@@ -88,6 +88,16 @@ public class User {
 	//@NotEmpty también sirve para validar listas vacías
 	@NotEmpty
 	private List<Role> roles;	
+	
+	private boolean enable;
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 
 	public Country getCountry() {
 		return country;

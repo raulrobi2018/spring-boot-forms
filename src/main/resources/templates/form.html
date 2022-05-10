@@ -10,6 +10,14 @@
 	<form th:action="@{/form}" method="post" th:object="${user}">
 
 		<div>
+			<label for="enable">Enable</label>
+			<div>				
+				<input id="enable" type="checkbox" th:field="*{enable}">
+			</div>
+			<div th:if="${#fields.hasErrors('enable')}" th:errors="*{enable}"></div>
+		</div>
+
+		<div>
 			<label for="country">Country</label>
 			<div>				
 				<select id="country" th:field="*{country}">

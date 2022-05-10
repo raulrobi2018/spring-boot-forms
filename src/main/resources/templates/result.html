@@ -8,7 +8,7 @@
 
 	<h3 th:text="${title}"></h3>
 
-	<ul>
+	<ul>		
 		<li th:text="${user.name}"></li>
 		<li th:text="${user.lastName}"></li>
 		<li th:text="${user.username}"></li>
@@ -19,6 +19,7 @@
 		<li th:text="${user.country.id}"></li>
 		<li th:text="${user.country.name}"></li>
 		<li th:text="${#dates.format(user.birthDate, 'dd/MM/yyyy')}"></li>
+		<li th:text="'Habilitado: ' + ${user.enable}"></li>
 	</ul>
 
 	<div>Roles</div>
