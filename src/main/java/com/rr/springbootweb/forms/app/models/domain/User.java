@@ -93,6 +93,8 @@ public class User {
 	
 	@NotEmpty
 	private String genre;
+	
+	private String hiddenValue;
 
 	public boolean isEnable() {
 		return enable;
@@ -196,6 +198,14 @@ public class User {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+
+	public String getHiddenValue() {
+		return hiddenValue;
+	}
+
+	public void setHiddenValue(String hiddenValue) {
+		this.hiddenValue = hiddenValue;
 	}
 
 }

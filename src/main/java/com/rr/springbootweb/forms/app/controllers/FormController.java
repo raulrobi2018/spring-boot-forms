@@ -123,6 +123,7 @@ public class FormController {
 		user.setLastName("Fernandez");
 		user.setIdentifier("3232.654.228.D");
 		user.setEnable(true);
+		user.setHiddenValue("Some hidden value");
 		
 		model.addAttribute("title", "Form login");
 		model.addAttribute("user", user);
