@@ -1,6 +1,7 @@
 package com.rr.springbootweb.forms.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +77,11 @@ public class FormController {
 
 		binder.registerCustomEditor(Country.class, "country", countryEditor);
 		binder.registerCustomEditor(Role.class, "roles", roleEditor);
+	}
+	
+	@ModelAttribute("genres")
+	public List<String> genres() {
+		return Arrays.asList("Male", "Female");
 	}
 
 	@ModelAttribute("countries")

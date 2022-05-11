@@ -11,19 +11,35 @@
 
 		<div>
 			<label for="enable">Enable</label>
-			<div>				
+			<div>
 				<input id="enable" type="checkbox" th:field="*{enable}">
 			</div>
 			<div th:if="${#fields.hasErrors('enable')}" th:errors="*{enable}"></div>
 		</div>
 
 		<div>
+			<label>Genre</label>
+			<!-- Aquí se observa que:
+				${genres}: es la fuente de datos a recorrer con el each. Es el ModelAttribute que definimos en el Controller
+				*{genre}: es el campo del objeto al que accedemos, en este caso User.genre
+				${gen}: es el objeto recorrido por el each. En este caso es un String
+				'genre': hace referencia al campo declarado con * (asterisco) -->
+			<div th:each="gen: ${genres}">
+				<input type="radio" th:field="*{genre}" th:value="${gen}">
+				<label th:for="${#ids.prev('genre')}" th:text="${gen}"></label>
+			</div>
+			<div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+		</div>
+
+		<div>
 			<label for="country">Country</label>
-			<div>				
+			<div>
 				<select id="country" th:field="*{country}">
 					<option value="">-- select a country --</option>
 					<!-- Si la lista es un List -->
- 					<option th:each="country: ${countries}" th:text="${country.code} + ' - ' + ${country.name}" th:value="${country.id}"></option> 
+					<option th:each="country: ${countries}"
+						th:text="${country.code} + ' - ' + ${country.name}"
+						th:value="${country.id}"></option>
 					<!-- Si la lista es un Map -->
 					<!-- <option th:each="country: ${countriesMap.entrySet()}" th:text="${country.value}" th:value="${country.key}"></option> -->
 				</select>
@@ -32,7 +48,7 @@
 		</div>
 
 		<div>
-			<label >Roles</label>
+			<label>Roles</label>
 			<div th:each="role: ${roles}">
 				<!-- Recordar que el atributo "th:field" hace referencia al atributo "roles" de la clase "User" -->
 				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
@@ -47,13 +63,14 @@
 			</div>
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
 		</div>
-		
+
 		<div>
 			<label for="identifier">Identifier</label>
-			<div>				
+			<div>
 				<input id="identifier" type="text" th:field="*{identifier}">
 			</div>
-			<div th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}"></div>
+			<div th:if="${#fields.hasErrors('identifier')}"
+				th:errors="*{identifier}"></div>
 		</div>
 
 		<div>
@@ -79,14 +96,14 @@
 		</div>
 		<div>
 			<label for="lastName">Last name</label>
-			<div>				
+			<div>
 				<input id="lastName" type="text" th:field="*{lastName}">
 			</div>
 			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
 		</div>
 		<div>
 			<label for="username">Username</label>
-			<div>				
+			<div>
 				<input id="username" type="text" th:field="*{username}">
 			</div>
 			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
@@ -108,7 +125,7 @@
 			</div>
 			<!-- <div th:if="${error != null && error.containsKey('email')}" -->
 			<!-- th:text="${error.email}"></div> -->
-			
+
 			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 		</div>
 		<div>
@@ -116,24 +133,28 @@
 			<div>
 				<input id="account" type="text" th:field="*{account}">
 			</div>
-			
+
 			<div th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></div>
 		</div>
 		<div>
 			<label for="birthDate">Birth date</label>
 			<div>
-				<input id="birthDate" type="text" th:field="*{birthDate}" placeholder="dd/MM/yyyy">
+				<input id="birthDate" type="text" th:field="*{birthDate}"
+					placeholder="dd/MM/yyyy">
 			</div>
-			
-			<div th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+
+			<div th:if="${#fields.hasErrors('birthDate')}"
+				th:errors="*{birthDate}"></div>
 		</div>
 		<div>
 			<label for="otherDate">Other date</label>
 			<div>
-				<input id="otherDate" type="date" th:field="*{otherDate}" placeholder="dd/MM/yyyy">
+				<input id="otherDate" type="date" th:field="*{otherDate}"
+					placeholder="dd/MM/yyyy">
 			</div>
-			
-			<div th:if="${#fields.hasErrors('otherDate')}" th:errors="*{otherDate}"></div>
+
+			<div th:if="${#fields.hasErrors('otherDate')}"
+				th:errors="*{otherDate}"></div>
 		</div>
 		<div>
 

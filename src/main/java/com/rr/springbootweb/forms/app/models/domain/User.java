@@ -90,6 +90,9 @@ public class User {
 	private List<Role> roles;	
 	
 	private boolean enable;
+	
+	@NotEmpty
+	private String genre;
 
 	public boolean isEnable() {
 		return enable;
@@ -185,6 +188,14 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 }
