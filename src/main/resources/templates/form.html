@@ -50,8 +50,13 @@
 		<div>
 			<label>Roles</label>
 			<div th:each="role: ${roles}">
-				<!-- Recordar que el atributo "th:field" hace referencia al atributo "roles" de la clase "User" -->
-				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
+				<!-- Recordar que el atributo "th:field" hace referencia al atributo "roles" de la clase "User".
+				El th:checked se utiliza para chequear un checkbox por defecto. Para eso utiliza el método
+				lists.contains, el cual recibe la lista de roles que la toma del User y el elmento del 
+				th:each que está verificando
+				 -->
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}" th:checked="${#lists.contains(user.roles, role)}" />
+				
 				<!-- El th:for funciona como la propiedad "for" de un label. Aquí nos permite que  
 					el checkbox pueda ser cliqueable también en el texto del label. El "#ids" con
 					el método prev() sirve para acceder al id que le asigna de forma automática a 

@@ -49,7 +49,7 @@ public class FormController {
 
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Autowired
 	private RoleEditor roleEditor;
 
@@ -78,7 +78,7 @@ public class FormController {
 		binder.registerCustomEditor(Country.class, "country", countryEditor);
 		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
-	
+
 	@ModelAttribute("genres")
 	public List<String> genres() {
 		return Arrays.asList("Male", "Female");
@@ -124,7 +124,9 @@ public class FormController {
 		user.setIdentifier("3232.654.228.D");
 		user.setEnable(true);
 		user.setHiddenValue("Some hidden value");
-		
+		user.setCountry(new Country(3, "BR", "Brasil"));
+		user.setRoles(Arrays.asList(new Role(2, "ROLE_USER", "User"), new Role(3, "ROLE_MODERATOR", "Moderator")));
+
 		model.addAttribute("title", "Form login");
 		model.addAttribute("user", user);
 		return "form";
