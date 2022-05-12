@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -151,13 +152,10 @@ public class FormController {
 	// quisieramos dar otro nombre
 	// se podría hacer de esta forma
 	@PostMapping("/form")
-	public String processForm(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,
-			SessionStatus status) {
+	public String processForm(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 
 		// Esta es otra forma de registrar el validador
 		// validator.validate(user, result);
-
-		model.addAttribute("title", "Form result");
 
 		if (result.hasErrors()) {
 			// Esta es una manera de mapear los errores. Otra forma es retornar el
@@ -169,14 +167,32 @@ public class FormController {
 //						"The field ".concat(err.getField()).concat(" ").concat(err.getDefaultMessage()));
 //			});
 //			model.addAttribute("error", errors);
+			model.addAttribute("title", "Form result");
 			return "form";
 		}
 
-		model.addAttribute("user", user);
+		return "redirect:/displayResult";
+	}
 
+	/**
+	 * Redirige el formulario cada vez que se envía la petición, evita que se vuelvan a procesar los datos.
+	 * Con @SessionAttribute, obtenemos el usuario que está guardado en sesión para
+	 * inyectarlo. No se precisa pasarlo como atributo porque ya está pasado a la
+	 * vista en el método form	
+	 * 
+	 * @return
+	 */
+	@GetMapping("/displayResult")
+	public String displayResult(@SessionAttribute(name = "user", required = false) User user, Model model, SessionStatus status) {
+		if(user == null) {
+			return "redirect:/form";
+		}
+		
+		model.addAttribute("title", "Form result");
 		// Elimina el objeto user de la sesión luego de procesada la información
 		status.setComplete();
 
 		return "result";
 	}
+
 }
