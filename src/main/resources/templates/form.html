@@ -11,6 +11,10 @@
 
 	<h3 th:text="${title}"></h3>
 
+	<div class="alert alert-success">
+		<span th:text="'Time elapsed: ' + ${timeElapsed} + ' milliseconds'"></span>
+	</div>
+
 	<div class="container">
 		<form th:action="@{/form}" method="post" th:object="${user}">
 

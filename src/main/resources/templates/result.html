@@ -10,6 +10,10 @@
 </head>
 <body>
 
+	<div class="alert alert-success">
+		<span th:text="'Time elapsed: ' + ${timeElapsed} + ' milliseconds'"></span>
+	</div>
+
 	<h3 th:text="${title}"></h3>
 
 	<div class="container">
