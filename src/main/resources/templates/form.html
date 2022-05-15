@@ -9,11 +9,9 @@
 </head>
 <body>
 
-	<h3 th:text="${title}"></h3>
+	<section th:replace="components/timeElapsed :: interceptor"></section>
 
-	<div class="alert alert-success">
-		<span th:text="'Time elapsed: ' + ${timeElapsed} + ' milliseconds'"></span>
-	</div>
+	<h3 th:text="${title}"></h3>
 
 	<div class="container">
 		<form th:action="@{/form}" method="post" th:object="${user}">

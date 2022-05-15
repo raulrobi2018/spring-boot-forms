@@ -16,6 +16,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(timeElapsedInterceptor);
+		//Indica que solo se va a aplicar el interceptor lo que esté dentro de form
+		registry.addInterceptor(timeElapsedInterceptor).addPathPatterns("/form/**");
 	}
 }

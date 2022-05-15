@@ -21,6 +21,11 @@ public class TimeElapsedInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		//Solo aplica el interceptor cuando la petición viene por Get y no por Post
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			return true;
+		}
+		
 		if (handler instanceof HandlerMethod) {
 			//Aquí accedemos al handler y podemos imprimir cualquier dato que este maneje
 			HandlerMethod method = (HandlerMethod) handler;
@@ -34,7 +39,7 @@ public class TimeElapsedInterceptor implements HandlerInterceptor {
 		long initialTime = System.currentTimeMillis();
 		request.setAttribute("initialTime", initialTime);
 		Random random = new Random();
-		int delay = random.nextInt(500);
+		int delay = random.nextInt(100);
 		Thread.sleep(delay);
 		return true;
 	}
@@ -42,6 +47,13 @@ public class TimeElapsedInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+
+		//Solo aplica el interceptor cuando la petición viene por Get y no por Post
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			return;
+		}
+		
+		
 		long endTime = System.currentTimeMillis();
 		long initialTime = (Long) request.getAttribute("initialTime");
 		long timeElapsed = endTime - initialTime;
